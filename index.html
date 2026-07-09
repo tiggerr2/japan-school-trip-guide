@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Japan School Trip Guide</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fb;
+    }
+
+    header {
+      background-color: #ff6b6b;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 15px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 15px;
+    }
+
+    button {
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background-color: white;
+      font-size: 16px;
+      box-shadow: 0 2px 5px #ccc;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ffe3e3;
+    }
+
+    .content {
+      background-color: white;
+      margin: 15px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px #ccc;
+      line-height: 1.7;
+    }
+
+    h2 {
+      color: #ff6b6b;
+    }
+
+    label {
+      display: block;
+      margin: 8px 0;
+    }
+
+    .home {
+      background-color: #ff6b6b;
+      color: white;
+      margin-top: 15px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Japan School Trip Guide</h1>
+    <p>일본 수학여행을 준비하는 친구들을 위한 길잡이 앱</p>
+  </header>
+
+  <div class="menu">
+    <button onclick="showCheck()">준비물 체크</button>
+    <button onclick="showJapanese()">일본어 표현</button>
+    <button onclick="showEmergency()">긴급상황</button>
+    <button onclick="showManner()">일본 예절</button>
+  </div>
+
+  <div class="content" id="content">
+    <h2>앱 소개</h2>
+    <p>
+      이 웹앱은 일본 수학여행을 가는 학생들이 준비물, 일본어 표현,
+      긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
+    </p>
+  </div>
+
+  <script>
+    function showCheck() {
+      document.getElementById("content").innerHTML = `
+        <h2>준비물 체크리스트</h2>
+        <label><input type="checkbox"> 여권</label>
+        <label><input type="checkbox"> 보조배터리</label>
+        <label><input type="checkbox"> 돼지코 어댑터</label>
+        <label><input type="checkbox"> 개인 상비약</label>
+        <label><input type="checkbox"> 우산</label>
+        <label><input type="checkbox"> 환전한 돈</label>
+        <label><input type="checkbox"> 세면도구</label>
+        <button class="home" onclick="showHome()">홈으로</button>
+      `;
+    }
+
+    function showJapanese() {
+      document.getElementById("content").innerHTML = `
+        <h2>상황별 일본어 표현</h2>
+        <p><b>화장실이 어디예요?</b><br>トイレはどこですか。<br>토이레와 도코데스카</p>
+        <p><b>이거 얼마예요?</b><br>これはいくらですか。<br>코레와 이쿠라데스카</p>
+        <p><b>도와주세요.</b><br>助けてください。<br>타스케테 쿠다사이</p>
+        <p><b>길을 잃었어요.</b><br>道に迷いました。<br>미치니 마요이마시타</p>
+        <button class="home" onclick="showHome()">홈으로</button>
+      `;
+    }
+
+    function showEmergency() {
+      document.getElementById("content").innerHTML = `
+        <h2>긴급상황 대처</h2>
+        <p><b>길을 잃었을 때</b><br>
+        1. 혼자 이동하지 않는다.<br>
+        2. 가까운 직원이나 경찰에게 도움을 요청한다.<br>
+        3. 선생님께 바로 연락한다.<br>
+        4. 정해진 집합 장소로 이동한다.</p>
+
+        <p><b>몸이 아플 때</b><br>
+        1. 증상을 참지 않는다.<br>
+        2. 선생님께 바로 알린다.<br>
+        3. 친구와 함께 이동한다.</p>
+
+        <p><b>여권을 잃어버렸을 때</b><br>
+        1. 즉시 선생님께 알린다.<br>
+        2. 마지막으로 사용한 장소를 확인한다.<br>
+        3. 필요하면 대사관에 도움을 요청한다.</p>
+
+        <button class="home" onclick="showHome()">홈으로</button>
+      `;
+    }
+
+    function showManner() {
+      document.getElementById("content").innerHTML = `
+        <h2>일본 예절</h2>
+        <ul>
+          <li>전철 안에서는 큰소리로 통화하지 않기</li>
+          <li>식당이나 상점에서는 차례대로 줄서기</li>
+          <li>쓰레기는 정해진 장소에 버리기</li>
+          <li>숙소에서는 밤늦게 큰소리 내지 않기</li>
+          <li>관광지에서는 집합 시간과 장소를 꼭 기억하기</li>
+        </ul>
+        <button class="home" onclick="showHome()">홈으로</button>
+      `;
+    }
+
+    function showHome() {
+      document.getElementById("content").innerHTML = `
+        <h2>앱 소개</h2>
+        <p>
+          이 웹앱은 일본 수학여행을 가는 학생들이 준비물, 일본어 표현,
+          긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
+        </p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
