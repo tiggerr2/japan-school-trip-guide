@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Japan School Trip Guide</title>
+
   <style>
     body {
       margin: 0;
@@ -72,8 +73,15 @@
       margin-top: 15px;
       width: 100%;
     }
+
+    .phrase {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -83,7 +91,7 @@
 
   <div class="menu">
     <button onclick="showCheck()">준비물 체크</button>
-    <button onclick="showJapanese()">일본어 표현</button>
+    <button onclick="showJapanese()">일본어·영어 표현</button>
     <button onclick="showEmergency()">긴급상황</button>
     <button onclick="showManner()">일본 예절</button>
   </div>
@@ -92,7 +100,7 @@
     <h2>앱 소개</h2>
     <p>
       이 웹앱은 일본 수학여행을 가는 학생들이 준비물, 일본어 표현,
-      긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
+      영어 표현, 긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
     </p>
   </div>
 
@@ -107,17 +115,86 @@
         <label><input type="checkbox"> 우산</label>
         <label><input type="checkbox"> 환전한 돈</label>
         <label><input type="checkbox"> 세면도구</label>
+        <label><input type="checkbox"> 필기구</label>
+        <label><input type="checkbox"> 휴대폰 충전기</label>
         <button class="home" onclick="showHome()">홈으로</button>
       `;
     }
 
     function showJapanese() {
       document.getElementById("content").innerHTML = `
-        <h2>상황별 일본어 표현</h2>
-        <p><b>화장실이 어디예요?</b><br>トイレはどこですか。<br>토이레와 도코데스카</p>
-        <p><b>이거 얼마예요?</b><br>これはいくらですか。<br>코레와 이쿠라데스카</p>
-        <p><b>도와주세요.</b><br>助けてください。<br>타스케테 쿠다사이</p>
-        <p><b>길을 잃었어요.</b><br>道に迷いました。<br>미치니 마요이마시타</p>
+        <h2>상황별 일본어·영어 표현</h2>
+
+        <div class="phrase">
+          <b>화장실이 어디예요?</b><br>
+          일본어: トイレはどこですか。<br>
+          발음: 토이레와 도코데스카<br>
+          영어: Where is the restroom?
+        </div>
+
+        <div class="phrase">
+          <b>이거 얼마예요?</b><br>
+          일본어: これはいくらですか。<br>
+          발음: 코레와 이쿠라데스카<br>
+          영어: How much is this?
+        </div>
+
+        <div class="phrase">
+          <b>도와주세요.</b><br>
+          일본어: 助けてください。<br>
+          발음: 타스케테 쿠다사이<br>
+          영어: Please help me.
+        </div>
+
+        <div class="phrase">
+          <b>길을 잃었어요.</b><br>
+          일본어: 道に迷いました。<br>
+          발음: 미치니 마요이마시타<br>
+          영어: I am lost.
+        </div>
+
+        <div class="phrase">
+          <b>선생님께 연락하고 싶어요.</b><br>
+          일본어: 先生に連絡したいです。<br>
+          발음: 센세이니 렌라쿠 시타이데스<br>
+          영어: I want to contact my teacher.
+        </div>
+
+        <div class="phrase">
+          <b>알레르기가 있어요.</b><br>
+          일본어: アレルギーがあります。<br>
+          발음: 아레루기-가 아리마스<br>
+          영어: I have an allergy.
+        </div>
+
+        <div class="phrase">
+          <b>물을 주세요.</b><br>
+          일본어: 水をください。<br>
+          발음: 미즈오 쿠다사이<br>
+          영어: Water, please.
+        </div>
+
+        <div class="phrase">
+          <b>한국어를 할 수 있는 사람이 있나요?</b><br>
+          일본어: 韓国語ができる人はいますか。<br>
+          발음: 칸코쿠고가 데키루 히토와 이마스카<br>
+          영어: Is there anyone who can speak Korean?
+        </div>
+
+        <div class="phrase">
+          <b>사진을 찍어도 되나요?</b><br>
+          일본어: 写真を撮ってもいいですか。<br>
+          발음: 샤신오 톳테모 이이데스카<br>
+          영어: May I take a picture?
+        </div>
+
+        <div class="phrase">
+          <b>추천 메뉴가 뭐예요?</b><br>
+          일본어: おすすめは何ですか。<br>
+          발음: 오스스메와 난데스카<br>
+          영어: What do you recommend?
+        </div>
+
         <button class="home" onclick="showHome()">홈으로</button>
       `;
     }
@@ -125,6 +202,7 @@
     function showEmergency() {
       document.getElementById("content").innerHTML = `
         <h2>긴급상황 대처</h2>
+
         <p><b>길을 잃었을 때</b><br>
         1. 혼자 이동하지 않는다.<br>
         2. 가까운 직원이나 경찰에게 도움을 요청한다.<br>
@@ -141,6 +219,11 @@
         2. 마지막으로 사용한 장소를 확인한다.<br>
         3. 필요하면 대사관에 도움을 요청한다.</p>
 
+        <p><b>친구와 떨어졌을 때</b><br>
+        1. 혼자 멀리 이동하지 않는다.<br>
+        2. 정해진 집합 장소로 간다.<br>
+        3. 선생님이나 인솔자에게 연락한다.</p>
+
         <button class="home" onclick="showHome()">홈으로</button>
       `;
     }
@@ -154,6 +237,8 @@
           <li>쓰레기는 정해진 장소에 버리기</li>
           <li>숙소에서는 밤늦게 큰소리 내지 않기</li>
           <li>관광지에서는 집합 시간과 장소를 꼭 기억하기</li>
+          <li>상점에서 물건을 함부로 만지지 않기</li>
+          <li>공공장소에서 다른 사람에게 방해되지 않도록 조용히 행동하기</li>
         </ul>
         <button class="home" onclick="showHome()">홈으로</button>
       `;
@@ -164,7 +249,7 @@
         <h2>앱 소개</h2>
         <p>
           이 웹앱은 일본 수학여행을 가는 학생들이 준비물, 일본어 표현,
-          긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
+          영어 표현, 긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
         </p>
       `;
     }
