@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>Japan School Trip Guide</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>일본 수학여행 안전 웹앱</title>
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f5f7fb;
+      font-family: "Arial", sans-serif;
+      background-color: #f4f8ff;
+      color: #222;
     }
 
     header {
-      background-color: #ff6b6b;
+      background-color: #2f80ed;
       color: white;
       text-align: center;
-      padding: 25px 10px;
+      padding: 25px 15px;
     }
 
     header h1 {
@@ -24,236 +26,466 @@
     }
 
     header p {
-      margin-top: 8px;
+      margin-top: 10px;
       font-size: 15px;
     }
 
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      background-color: white;
       padding: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
-    button {
-      padding: 15px;
+    nav button {
       border: none;
-      border-radius: 12px;
-      background-color: white;
-      font-size: 16px;
-      box-shadow: 0 2px 5px #ccc;
+      background-color: #2f80ed;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 20px;
+      font-size: 15px;
       cursor: pointer;
     }
 
-    button:hover {
-      background-color: #ffe3e3;
+    nav button:hover {
+      background-color: #1c5fb8;
     }
 
-    .content {
-      background-color: white;
-      margin: 15px;
+    section {
+      display: none;
+      max-width: 900px;
+      margin: 25px auto;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 5px #ccc;
-      line-height: 1.7;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    section.active {
+      display: block;
     }
 
     h2 {
-      color: #ff6b6b;
+      color: #2f80ed;
+      border-bottom: 2px solid #2f80ed;
+      padding-bottom: 8px;
     }
 
-    label {
+    h3 {
+      color: #333;
+      margin-top: 25px;
+    }
+
+    .home-text {
+      text-align: center;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .emoji {
+      font-size: 38px;
+    }
+
+    .checklist label {
       display: block;
+      background-color: #eef5ff;
       margin: 8px 0;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 16px;
     }
 
-    .home {
-      background-color: #ff6b6b;
-      color: white;
-      margin-top: 15px;
+    .checklist input {
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+
+    .search-box {
       width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: 1px solid #bbb;
+      border-radius: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
     }
 
-    .phrase {
-      border-bottom: 1px solid #eee;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background-color: white;
+    }
+
+    th {
+      background-color: #2f80ed;
+      color: white;
+      padding: 12px;
+    }
+
+    td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f7fbff;
+    }
+
+    .category {
+      background-color: #dbeafe !important;
+      font-weight: bold;
+      color: #1c5fb8;
+    }
+
+    .card {
+      background-color: #eef5ff;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 12px;
+      border-left: 6px solid #2f80ed;
+    }
+
+    .card ul {
+      margin-top: 8px;
+    }
+
+    .card li {
+      margin: 7px 0;
+    }
+
+    footer {
+      text-align: center;
+      margin: 30px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 600px) {
+      header h1 {
+        font-size: 23px;
+      }
+
+      nav button {
+        width: 100%;
+      }
+
+      section {
+        margin: 15px;
+        padding: 15px;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      th, td {
+        padding: 8px;
+      }
     }
   </style>
 </head>
 
 <body>
-
   <header>
-    <h1>Japan School Trip Guide</h1>
-    <p>일본 수학여행을 준비하는 친구들을 위한 길잡이 앱</p>
+    <h1>일본 수학여행 안전 웹앱</h1>
+    <p>준비물 체크, 생활 표현, 긴급상황 대처법을 한눈에 확인하세요.</p>
   </header>
 
-  <div class="menu">
-    <button onclick="showCheck()">준비물 체크</button>
-    <button onclick="showJapanese()">일본어·영어 표현</button>
-    <button onclick="showEmergency()">긴급상황</button>
-    <button onclick="showManner()">일본 예절</button>
-  </div>
+  <nav>
+    <button onclick="showSection('home')">홈</button>
+    <button onclick="showSection('checklist')">준비물 체크리스트</button>
+    <button onclick="showSection('phrases')">일본어·영어 표현</button>
+    <button onclick="showSection('emergency')">긴급상황 대처법</button>
+  </nav>
 
-  <div class="content" id="content">
-    <h2>앱 소개</h2>
-    <p>
-      이 웹앱은 일본 수학여행을 가는 학생들이 준비물, 일본어 표현,
-      영어 표현, 긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
-    </p>
-  </div>
+  <section id="home" class="active">
+    <div class="home-text">
+      <div class="emoji">✈️🇯🇵</div>
+      <h2>일본 수학여행 준비 웹앱</h2>
+      <p>
+        이 웹앱은 일본 수학여행을 준비하는 학생들이<br />
+        필요한 준비물을 확인하고, 여행 중 필요한 일본어·영어 표현과<br />
+        긴급상황 대처 방법을 쉽게 찾아볼 수 있도록 제작되었습니다.
+      </p>
+      <p>
+        위의 메뉴를 눌러 필요한 내용을 확인하세요.
+      </p>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <h2>1. 일본 수학여행 준비물</h2>
+    <p>준비한 물건을 체크하면서 빠뜨린 물건이 없는지 확인하세요.</p>
+
+    <div class="checklist">
+      <label><input type="checkbox" /> 여권</label>
+      <label><input type="checkbox" /> 여권 사본</label>
+      <label><input type="checkbox" /> 학생증</label>
+      <label><input type="checkbox" /> 개인 상비약</label>
+      <label><input type="checkbox" /> 충전기</label>
+      <label><input type="checkbox" /> 보조배터리</label>
+      <label><input type="checkbox" /> 일본 엔화</label>
+      <label><input type="checkbox" /> 교통카드</label>
+      <label><input type="checkbox" /> 세면도구</label>
+      <label><input type="checkbox" /> 필기구</label>
+      <label><input type="checkbox" /> 비상 연락처</label>
+    </div>
+  </section>
+
+  <section id="phrases">
+    <h2>2. 일본어 및 영어 표현</h2>
+    <p>긴급 상황과 여행 생활에서 자주 사용하는 표현을 일본어와 영어로 정리했습니다.</p>
+
+    <input
+      type="text"
+      id="searchInput"
+      class="search-box"
+      onkeyup="searchTable()"
+      placeholder="필요한 표현을 검색하세요. 예: 병원, 화장실, 카드, 얼마, 도움"
+    />
+
+    <table id="phraseTable">
+      <thead>
+        <tr>
+          <th>상황</th>
+          <th>일본어</th>
+          <th>영어</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr class="category">
+          <td colspan="3">긴급 상황 표현</td>
+        </tr>
+        <tr>
+          <td>도와주세요</td>
+          <td>助けてください</td>
+          <td>Help me.</td>
+        </tr>
+        <tr>
+          <td>병원은 어디인가요?</td>
+          <td>病院はどこですか。</td>
+          <td>Where is the hospital?</td>
+        </tr>
+        <tr>
+          <td>길을 잃었습니다</td>
+          <td>道に迷いました。</td>
+          <td>I am lost.</td>
+        </tr>
+        <tr>
+          <td>경찰서를 찾고 있습니다</td>
+          <td>警察署はどこですか。</td>
+          <td>Where is the police station?</td>
+        </tr>
+        <tr>
+          <td>아파요</td>
+          <td>具合が悪いです。</td>
+          <td>I feel sick.</td>
+        </tr>
+        <tr>
+          <td>선생님께 연락하고 싶습니다</td>
+          <td>先生に連絡したいです。</td>
+          <td>I want to contact my teacher.</td>
+        </tr>
+
+        <tr class="category">
+          <td colspan="3">기본 인사 표현</td>
+        </tr>
+        <tr>
+          <td>안녕하세요</td>
+          <td>こんにちは。</td>
+          <td>Hello.</td>
+        </tr>
+        <tr>
+          <td>좋은 아침입니다</td>
+          <td>おはようございます。</td>
+          <td>Good morning.</td>
+        </tr>
+        <tr>
+          <td>안녕히 가세요 / 안녕히 계세요</td>
+          <td>さようなら。</td>
+          <td>Goodbye.</td>
+        </tr>
+        <tr>
+          <td>처음 뵙겠습니다</td>
+          <td>はじめまして。</td>
+          <td>Nice to meet you.</td>
+        </tr>
+        <tr>
+          <td>감사합니다</td>
+          <td>ありがとうございます。</td>
+          <td>Thank you.</td>
+        </tr>
+        <tr>
+          <td>죄송합니다 / 실례합니다</td>
+          <td>すみません。</td>
+          <td>Excuse me.</td>
+        </tr>
+        <tr>
+          <td>괜찮습니다</td>
+          <td>大丈夫です。</td>
+          <td>It is okay.</td>
+        </tr>
+        <tr>
+          <td>알겠습니다</td>
+          <td>わかりました。</td>
+          <td>I understand.</td>
+        </tr>
+
+        <tr class="category">
+          <td colspan="3">물건 구매 표현</td>
+        </tr>
+        <tr>
+          <td>이것은 얼마인가요?</td>
+          <td>これはいくらですか。</td>
+          <td>How much is this?</td>
+        </tr>
+        <tr>
+          <td>이것을 주세요</td>
+          <td>これをください。</td>
+          <td>I would like this, please.</td>
+        </tr>
+        <tr>
+          <td>봉투 주세요</td>
+          <td>袋をください。</td>
+          <td>Can I have a bag?</td>
+        </tr>
+        <tr>
+          <td>카드로 계산할 수 있나요?</td>
+          <td>カードで払えますか。</td>
+          <td>Can I pay by card?</td>
+        </tr>
+        <tr>
+          <td>현금으로 계산하겠습니다</td>
+          <td>現金で払います。</td>
+          <td>I will pay in cash.</td>
+        </tr>
+        <tr>
+          <td>영수증 주세요</td>
+          <td>レシートをください。</td>
+          <td>Can I have a receipt?</td>
+        </tr>
+        <tr>
+          <td>추천 메뉴가 무엇인가요?</td>
+          <td>おすすめは何ですか。</td>
+          <td>What do you recommend?</td>
+        </tr>
+        <tr>
+          <td>물을 주세요</td>
+          <td>水をください。</td>
+          <td>Can I have some water?</td>
+        </tr>
+
+        <tr class="category">
+          <td colspan="3">길 찾기 표현</td>
+        </tr>
+        <tr>
+          <td>화장실은 어디인가요?</td>
+          <td>トイレはどこですか。</td>
+          <td>Where is the restroom?</td>
+        </tr>
+        <tr>
+          <td>역은 어디인가요?</td>
+          <td>駅はどこですか。</td>
+          <td>Where is the station?</td>
+        </tr>
+        <tr>
+          <td>여기로 가고 싶습니다</td>
+          <td>ここに行きたいです。</td>
+          <td>I want to go here.</td>
+        </tr>
+        <tr>
+          <td>다시 말해 주세요</td>
+          <td>もう一度言ってください。</td>
+          <td>Please say that again.</td>
+        </tr>
+        <tr>
+          <td>천천히 말해 주세요</td>
+          <td>ゆっくり話してください。</td>
+          <td>Please speak slowly.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="emergency">
+    <h2>3. 긴급상황 대처법</h2>
+    <p>상황별로 침착하게 행동할 수 있도록 행동요령을 정리했습니다.</p>
+
+    <div class="card">
+      <h3>여권 분실</h3>
+      <ul>
+        <li>인솔교사에게 즉시 알리기</li>
+        <li>대한민국 대사관 연락</li>
+        <li>경찰 신고</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>병원 이용</h3>
+      <ul>
+        <li>가까운 병원 찾기</li>
+        <li>증상을 일본어로 설명하기</li>
+        <li>여행자 보험 활용하기</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>자연재해 발생</h3>
+      <ul>
+        <li>학교 인솔교사의 안내 따르기</li>
+        <li>안전한 장소로 이동하기</li>
+        <li>재난 문자 확인하기</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>길을 잃었을 때</h3>
+      <ul>
+        <li>현재 위치 확인</li>
+        <li>인솔교사 연락</li>
+        <li>경찰이나 역무원에게 도움 요청</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    일본 수학여행 안전 웹앱 | GitHub Pages용 index.html
+  </footer>
 
   <script>
-    function showCheck() {
-      document.getElementById("content").innerHTML = `
-        <h2>준비물 체크리스트</h2>
-        <label><input type="checkbox"> 여권</label>
-        <label><input type="checkbox"> 보조배터리</label>
-        <label><input type="checkbox"> 돼지코 어댑터</label>
-        <label><input type="checkbox"> 개인 상비약</label>
-        <label><input type="checkbox"> 우산</label>
-        <label><input type="checkbox"> 환전한 돈</label>
-        <label><input type="checkbox"> 세면도구</label>
-        <label><input type="checkbox"> 필기구</label>
-        <label><input type="checkbox"> 휴대폰 충전기</label>
-        <button class="home" onclick="showHome()">홈으로</button>
-      `;
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll("section");
+
+      sections.forEach(function(section) {
+        section.classList.remove("active");
+      });
+
+      document.getElementById(sectionId).classList.add("active");
     }
 
-    function showJapanese() {
-      document.getElementById("content").innerHTML = `
-        <h2>상황별 일본어·영어 표현</h2>
+    function searchTable() {
+      const input = document.getElementById("searchInput");
+      const filter = input.value.toLowerCase();
+      const table = document.getElementById("phraseTable");
+      const rows = table.getElementsByTagName("tr");
 
-        <div class="phrase">
-          <b>화장실이 어디예요?</b><br>
-          일본어: トイレはどこですか。<br>
-          발음: 토이레와 도코데스카<br>
-          영어: Where is the restroom?
-        </div>
+      for (let i = 1; i < rows.length; i++) {
+        const rowText = rows[i].innerText.toLowerCase();
 
-        <div class="phrase">
-          <b>이거 얼마예요?</b><br>
-          일본어: これはいくらですか。<br>
-          발음: 코레와 이쿠라데스카<br>
-          영어: How much is this?
-        </div>
-
-        <div class="phrase">
-          <b>도와주세요.</b><br>
-          일본어: 助けてください。<br>
-          발음: 타스케테 쿠다사이<br>
-          영어: Please help me.
-        </div>
-
-        <div class="phrase">
-          <b>길을 잃었어요.</b><br>
-          일본어: 道に迷いました。<br>
-          발음: 미치니 마요이마시타<br>
-          영어: I am lost.
-        </div>
-
-        <div class="phrase">
-          <b>선생님께 연락하고 싶어요.</b><br>
-          일본어: 先生に連絡したいです。<br>
-          발음: 센세이니 렌라쿠 시타이데스<br>
-          영어: I want to contact my teacher.
-        </div>
-
-        <div class="phrase">
-          <b>알레르기가 있어요.</b><br>
-          일본어: アレルギーがあります。<br>
-          발음: 아레루기-가 아리마스<br>
-          영어: I have an allergy.
-        </div>
-
-        <div class="phrase">
-          <b>물을 주세요.</b><br>
-          일본어: 水をください。<br>
-          발음: 미즈오 쿠다사이<br>
-          영어: Water, please.
-        </div>
-
-        <div class="phrase">
-          <b>한국어를 할 수 있는 사람이 있나요?</b><br>
-          일본어: 韓国語ができる人はいますか。<br>
-          발음: 칸코쿠고가 데키루 히토와 이마스카<br>
-          영어: Is there anyone who can speak Korean?
-        </div>
-
-        <div class="phrase">
-          <b>사진을 찍어도 되나요?</b><br>
-          일본어: 写真を撮ってもいいですか。<br>
-          발음: 샤신오 톳테모 이이데스카<br>
-          영어: May I take a picture?
-        </div>
-
-        <div class="phrase">
-          <b>추천 메뉴가 뭐예요?</b><br>
-          일본어: おすすめは何ですか。<br>
-          발음: 오스스메와 난데스카<br>
-          영어: What do you recommend?
-        </div>
-
-        <button class="home" onclick="showHome()">홈으로</button>
-      `;
-    }
-
-    function showEmergency() {
-      document.getElementById("content").innerHTML = `
-        <h2>긴급상황 대처</h2>
-
-        <p><b>길을 잃었을 때</b><br>
-        1. 혼자 이동하지 않는다.<br>
-        2. 가까운 직원이나 경찰에게 도움을 요청한다.<br>
-        3. 선생님께 바로 연락한다.<br>
-        4. 정해진 집합 장소로 이동한다.</p>
-
-        <p><b>몸이 아플 때</b><br>
-        1. 증상을 참지 않는다.<br>
-        2. 선생님께 바로 알린다.<br>
-        3. 친구와 함께 이동한다.</p>
-
-        <p><b>여권을 잃어버렸을 때</b><br>
-        1. 즉시 선생님께 알린다.<br>
-        2. 마지막으로 사용한 장소를 확인한다.<br>
-        3. 필요하면 대사관에 도움을 요청한다.</p>
-
-        <p><b>친구와 떨어졌을 때</b><br>
-        1. 혼자 멀리 이동하지 않는다.<br>
-        2. 정해진 집합 장소로 간다.<br>
-        3. 선생님이나 인솔자에게 연락한다.</p>
-
-        <button class="home" onclick="showHome()">홈으로</button>
-      `;
-    }
-
-    function showManner() {
-      document.getElementById("content").innerHTML = `
-        <h2>일본 예절</h2>
-        <ul>
-          <li>전철 안에서는 큰소리로 통화하지 않기</li>
-          <li>식당이나 상점에서는 차례대로 줄서기</li>
-          <li>쓰레기는 정해진 장소에 버리기</li>
-          <li>숙소에서는 밤늦게 큰소리 내지 않기</li>
-          <li>관광지에서는 집합 시간과 장소를 꼭 기억하기</li>
-          <li>상점에서 물건을 함부로 만지지 않기</li>
-          <li>공공장소에서 다른 사람에게 방해되지 않도록 조용히 행동하기</li>
-        </ul>
-        <button class="home" onclick="showHome()">홈으로</button>
-      `;
-    }
-
-    function showHome() {
-      document.getElementById("content").innerHTML = `
-        <h2>앱 소개</h2>
-        <p>
-          이 웹앱은 일본 수학여행을 가는 학생들이 준비물, 일본어 표현,
-          영어 표현, 긴급상황 대처 방법, 일본 예절을 쉽게 확인할 수 있도록 만든 앱입니다.
-        </p>
-      `;
+        if (rowText.includes(filter)) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
     }
   </script>
-
 </body>
 </html>
